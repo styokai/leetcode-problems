@@ -11,6 +11,8 @@ To accommodate this, nums1 has a length of m + n, where the first m elements den
 The last n elements are set to 0 and should be ignored. nums2 has a length of n.
 */
 
+#include <iostream>
+
 class Solution {
 public:
   void merge (vector<int>& nums1, int m, vector<int>& nums2, int n) {
@@ -25,20 +27,41 @@ public:
       arr[m + i] = nums2[i];
     }
 
-    // only solves 19 cases out of 56
-    for (int i = 0; i < size - 1; i++) {
-      int v {arr[i]};
-      int u {arr[i + 1]};
-      
-      // if current index is greater than next index then shift current index to the right
-      if (v > u) {
+    int v {};
+    int u {};
+
+    // i need to learn how to do recursion in c++
+    // the solution is recursion + some other if statement
+    // 57 / 59 testcases passed, previously 19 out of 56
+    for (int i = 0; i < size - 1; i++){
+        v = arr[i];
+        u = arr[i + 1];
+        if (v < u) {
+            for (int j = i; j < size - 1; j++) {
+                v = arr[j];
+                u = arr[j + 1];
+                if (v > u) {
+                    arr[j] = u;
+                    arr[j + 1] = v;
+                } else {
+                    for (int n = i; n < size - 1; n++) {
+                        v = arr[n];
+                        u = arr[n + 1];
+                        if (v > u) {
+                            arr[n] = u;
+                            arr[n + 1] = v;
+                        }
+                    }
+                }
+            }
+            continue;
+        }
         arr[i] = u;
         arr[i + 1] = v;
-      }
     }
 
    for (int i = 0; i < size; i++) {
       nums1[i] = arr[i];
     }
   }
-}
+};
