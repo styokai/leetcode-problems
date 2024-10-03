@@ -12,13 +12,14 @@ The last n elements are set to 0 and should be ignored. nums2 has a length of n.
 */
 
 #include <iostream>
-#include <vector>
 
 class Solution {
 public:
   void merge (vector<int>& nums1, int m, vector<int>& nums2, int n) {
     int const size {m + n};
     int arr[size];
+    int u{};
+    int v{};
 
     if (n <= 0) return;
     if (n > 0 & m <= 0){
@@ -30,8 +31,8 @@ public:
 
     for (int i = 0; i < size; i++) {
         if (i < m) {
-            int u = nums1[i]; // 2
-            int v = nums2[i]; // 5
+            u = nums1[i]; // 2
+            v = nums2[i]; // 5
             if (u > v){
                 arr[i] = v;
                 arr[m + i] = u;
@@ -48,8 +49,8 @@ public:
 
     // didn't wanted to make a new loop
     for (int i = 0; i < size - 1; i++) {
-        int u {arr[i]};
-        int v {arr[i + 1]};
+        u = arr[i];
+        v = arr[i + 1];
         if (u > v) {
             arr[i] = v;
             arr[i + 1] = u;
