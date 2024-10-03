@@ -12,6 +12,7 @@ The last n elements are set to 0 and should be ignored. nums2 has a length of n.
 */
 
 #include <iostream>
+#include <vector>
 
 class Solution {
 public:
@@ -19,19 +20,44 @@ public:
     int const size {m + n};
     int arr[size];
 
-    // I'M SO CLOSEEEEE
+    if (n <= 0) return;
+    if (n > 0 & m <= 0){
+        for (int i = 0; i < n; i++) {
+            nums1[i] = nums2[i];
+        }
+        return;
+    }
+
     for (int i = 0; i < size; i++) {
         if (i < m) {
-            int u = nums1[i];
-            int v = nums2[i];
+            int u = nums1[i]; // 2
+            int v = nums2[i]; // 5
             if (u > v){
                 arr[i] = v;
                 arr[m + i] = u;
+                //std::cout << u << ", " << v << " gotcha\n";
             } else {
-                arr[i] = u;
-                arr[m + i] = v;
+                std::cout << i << ": " << u;
+                std::cout << " > ";
+                std::cout << v << '\n';
+                arr[i] = u; // 2
+                arr[m + i] = v; // 5
             }
         }
+    }
+
+    // didn't wanted to make a new loop
+    for (int i = 0; i < size - 1; i++) {
+        int u {arr[i]};
+        int v {arr[i + 1]};
+        if (u > v) {
+            arr[i] = v;
+            arr[i + 1] = u;
+        }
+    }
+
+    for (int i = 0; i < size; i++) {
+        nums1[i] = arr[i];
     }
 
     for (int i = 0; i < size; i++) {
