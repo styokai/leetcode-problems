@@ -19,49 +19,23 @@ public:
     int const size {m + n};
     int arr[size];
 
-    for (int i = 0; i < m; i++) {
-      arr[i] = nums1[i];
-    }
-
-    for (int i = 0; i < n; i++) {
-      arr[m + i] = nums2[i];
-    }
-
-    int v {};
-    int u {};
-
-    // i need to learn how to do recursion in c++
-    // the solution is recursion + some other if statement
-    // 57 / 59 testcases passed, previously 19 out of 56
-    for (int i = 0; i < size - 1; i++){
-        v = arr[i];
-        u = arr[i + 1];
-        if (v < u) {
-            for (int j = i; j < size - 1; j++) {
-                v = arr[j];
-                u = arr[j + 1];
-                if (v > u) {
-                    arr[j] = u;
-                    arr[j + 1] = v;
-                } else {
-                    for (int n = i; n < size - 1; n++) {
-                        v = arr[n];
-                        u = arr[n + 1];
-                        if (v > u) {
-                            arr[n] = u;
-                            arr[n + 1] = v;
-                        }
-                    }
-                }
+    // I'M SO CLOSEEEEE
+    for (int i = 0; i < size; i++) {
+        if (i < m) {
+            int u = nums1[i];
+            int v = nums2[i];
+            if (u > v){
+                arr[i] = v;
+                arr[m + i] = u;
+            } else {
+                arr[i] = u;
+                arr[m + i] = v;
             }
-            continue;
         }
-        arr[i] = u;
-        arr[i + 1] = v;
     }
 
-   for (int i = 0; i < size; i++) {
-      nums1[i] = arr[i];
+    for (int i = 0; i < size; i++) {
+        std::cout << arr[i] << ", ";
     }
   }
 };
